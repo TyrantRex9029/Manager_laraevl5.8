@@ -6,11 +6,16 @@ use App\Http\Controllers\AuthController;
 Route::middleware(['auth.admin'])->group(function(){
 // หน้าแรก
 Route::get('/index', [DataController::class, 'index']);
-Route::get("search",[DataController::class,'search']);
 Route::get('/', [DataController::class, 'index']); 
+Route::get('/search',[DataController::class,'search']);
 // สรา้งสมาชิก
 Route::post('/saveData', [DataController::class, 'store']); 
 Route::get('/create', [DataController::class, 'create']);
+
+//test route
+Route::get('/place_create',[DataController::class,'place_create']);
+Route::get('/place_save',[DataController::class,'place_save']);
+Route::post('/savePlace', [DataController::class, 'storePlace']);
 });
 
 
@@ -23,9 +28,7 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/NonsaveData', [DataController::class, 'Nonstore']); 
 
 
-//test route
-Route::get('/place',[DataController::class,'place']);
-Route::post('/savePlace', [DataController::class, 'store']);
+
 
 
 

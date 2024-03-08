@@ -4,9 +4,11 @@
 
 @section('content_user')
     <h2 class="py-2">สมาชิกทั้งหมด</h2>
-    <form class="d-flex py-2" action="search">
-        <input class="form-control me-2" name="search" placeholder="ค้นหา" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">ค้นหา</button>
+    <form method="get" action="/search">
+        <div class="input-group">
+            <input class="form-control" name="search" placeholder="Search..." value="{{ isset($search) ? $search : ''}}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
     </form>
     <table class="table table-bordered">
         <thead class="table-dark text-center">
@@ -28,6 +30,7 @@
                     <td>{{ $item->address }}</td>
                 </tr>
             @endforeach
+            
         </tbody>
     </table>
     {{$DataModels->links()}}

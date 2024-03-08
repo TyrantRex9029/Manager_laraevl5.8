@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class AuthController extends Controller
 {
+   
     public function showLogin()
     {
         return view('login');
@@ -43,6 +45,5 @@ class AuthController extends Controller
         session()->regenerateToken();
         return redirect('/login');
     }
-
 
 }

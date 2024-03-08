@@ -4,7 +4,7 @@
 
 @section('content_user')
     <h2>ระบบจัดการที่จังหวัด และ จัดการอำเภอ</h2>
-    <form method="POST" action="#">
+    <form method="POST" action="/savePlace">
         @csrf
         <div class="input-group py-2">
             <span class="input-group-text">จังหวัด</span>
@@ -28,13 +28,13 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($Insert_City as $item)
+            @foreach ($DataModels_place as $item)
                 <tr>
-                    <td>{{$item->City}}</td>
-                    <td>{{$item->Dis}}</td>
+                    <td>{{$item->city}}</td>
+                    <td>{{$item->dis}}</td>
                 </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
     </table>
-    {{-- {{$Insert_City->links()}} --}}
+    {{$DataModels_place->links()}}
 @endsection

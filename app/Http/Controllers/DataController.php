@@ -3,22 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DataRequest;
+use App\Http\Requests\SearchRequest;
+use App\Http\Requests\PlaceRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\DataModel;
 use App\User;
+
 class DataController extends Controller
 {
     public function index(){
         $DataModels = User::paginate(10);
         return view('manager',compact('DataModels'));
     }
+///////////////////////////////////////
+    public function search(Request $request){
+        $search = $request->search;
 
+        $DataModels =User::where(function($query) use ($search){
+            $query->where('name','like',"%$search%")->orWhere('lastname','like',"%$search%")
+            ->orWhere('tel','like',"%$search%")->orWhere('email','like',"%$search%")
+            ->orWhere('address','like',"%$search%");})->get();
+           dd($DataModels);
+           // return view('manager',compact('DataModels','search'));
+    }
+ //////////////////////////////////////
     public function create(){
         return view('form');
-    }
-    public function place(){
-        return view('place');
     }
 
     public function store(DataRequest $request){
@@ -28,12 +39,13 @@ class DataController extends Controller
     }
 
 
-
     public function Nonstore(DataRequest $request){
         $NonsaveData = new User;
         $this->save($NonsaveData, $request);
         return redirect('/login');
     }
+
+
     private function save($data, $value)
     {
         $data ->name     =$value->name;   
@@ -48,6 +60,24 @@ class DataController extends Controller
         $data ->save();
     }
 
+    ///////////////////////Place////////////////////////////////
+    public function place_create(){
+        $DataModels_place = DataModel::paginate(10);
+        return view('place',compact('DataModels_place'));
+    }
+
+    public function storePlace(PlaceRequest $request){
+        $savePlace = new DataModel;
+        $this->save_Place($savePlace, $request);
+        return redirect('/place_create');
+    }
+    private function save_Place($data, $value)
+    {
+        $data ->city     =$value->city;  
+        $data ->dis      =$value->dis;   
+        $data ->save();
+    }
+    
 
 
 }

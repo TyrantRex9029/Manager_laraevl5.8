@@ -34,7 +34,7 @@
                     </ul>
                   </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="place">ระบบจัดการที่จังหวัดและอำเภอ</a>
+                    <a class="nav-link" href="/place_create">ระบบจัดการที่จังหวัดและอำเภอ</a>
                 </li>
                
                 <li class="nav-item">

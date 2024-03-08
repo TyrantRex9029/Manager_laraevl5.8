@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SearchRequset extends FormRequest
+class PlaceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class SearchRequset extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,9 @@ class SearchRequset extends FormRequest
      */
     public function rules()
     {
-           
+            return [ 
+                'city'      =>'required',
+                'dis'       =>'required', 
+        ];
     }
 }
