@@ -4,8 +4,8 @@
 
 @section('content_user')
     <h2 class="py-2">สมาชิกทั้งหมด</h2>
-    <form class="d-flex py-2" role="search">
-        <input class="form-control me-2" type="search" placeholder="ค้นหา" aria-label="Search">
+    <form class="d-flex py-2" action="search">
+        <input class="form-control me-2" name="search" placeholder="ค้นหา" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">ค้นหา</button>
     </form>
     <table class="table table-bordered">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DataRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use App\DataModel;
 use App\User;
 class DataController extends Controller
@@ -46,4 +47,7 @@ class DataController extends Controller
         $data ->password =Hash::make($value->password);
         $data ->save();
     }
+
+
+
 }

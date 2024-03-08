@@ -5,7 +5,8 @@ use App\Http\Controllers\AuthController;
 
 Route::middleware(['auth.admin'])->group(function(){
 // หน้าแรก
-Route::get('/index', [DataController::class, 'index']); 
+Route::get('/index', [DataController::class, 'index']);
+Route::get("search",[DataController::class,'search']);
 Route::get('/', [DataController::class, 'index']); 
 // สรา้งสมาชิก
 Route::post('/saveData', [DataController::class, 'store']); 

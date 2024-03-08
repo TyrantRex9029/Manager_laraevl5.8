@@ -15,15 +15,8 @@ class CreateDataModelsTable extends Migration
     {
         Schema::create('data_models', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('lastname');
-            $table->string('tel');
-            $table->string('email');
-            $table->string('address');
             $table->string('dis');
             $table->string('city');
-            $table->string('code');
-            $table->string('password');
             $table->timestamps();
         });
     }
