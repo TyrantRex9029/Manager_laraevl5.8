@@ -38,19 +38,17 @@
             <span class="text text-danger">{{ $message }}</span>
         @enderror
         <div class="input-group py-2">
-            <label class="input-group-text" for="dis">อำเภอ</label>
-            <select name="dis" class="form-select" id="dis">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
             <label class="input-group-text" for="city">จังหวัด</label>
-            <select name="city" class="form-select" id="city">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select name="city" id="city"class="form-select">
+                @foreach ($DataPlace as $item)
+                    <option value = "{{ $item->city }}">{{ $item->city }}</option>
+                @endforeach
+            </select>
+            <label class="input-group-text" for="dis">อำเภอ</label>
+            <select name="dis" id="dis"class="form-select">
+                @foreach ($DataPlace as $item)
+                    <option value = "{{ $item->dis }}">{{ $item->dis }}</option>
+                @endforeach
             </select>
         </div>
         <div class="input-group py-2">

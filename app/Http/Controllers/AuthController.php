@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-
+use App\DataModel;
 class AuthController extends Controller
 {
    
@@ -17,7 +17,8 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('RegisterForm');
+        $DataPlace = DataModel::select('city','dis')->get();
+        return view('RegisterForm',compact('DataPlace'));
     }
 
     public function checkLogin(Request $request)

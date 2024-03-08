@@ -4,7 +4,7 @@
 
 @section('content_login')
     <h2 class="py-2">สร้างสมาชิก</h2>
-    <form  action="{{url('NonsaveData')}}" method="post">
+    <form action="{{ url('NonsaveData') }}" method="post">
         @csrf
         <div class="input-group py-2">
             <span class="input-group-text">ชื่อ</span>
@@ -38,26 +38,18 @@
             <span class="text text-danger">{{ $message }}</span>
         @enderror
         <div class="input-group py-2">
-            <label class="input-group-text" for="dis">อำเภอ</label>
-            <select name="dis" class="form-select" id="dis">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
             <label class="input-group-text" for="city">จังหวัด</label>
-            <select name="city" class="form-select" id="city">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select name="city" id="city"class="form-select">
+                @foreach ($DataPlace as $item)
+                    <option value = "{{ $item->city }}">{{ $item->city }}</option>
+                @endforeach
             </select>
-        </div>
-        <div class="input-group py-2">
-            <span class="input-group-text">รหัสไปรษณีย์</span>
-            <input type="text" name="code" class="form-control">
-            <span class="input-group-text">รหัสผ่าน</span>
-            <input type="password" name="password" class="form-control">
+            <label class="input-group-text" for="dis">อำเภอ</label>
+            <select name="dis" id="dis"class="form-select">
+                @foreach ($DataPlace as $item)
+                    <option value = "{{ $item->dis }}">{{ $item->dis }}</option>
+                @endforeach
+            </select>
         </div>
         @error('code')
             <span class="text text-danger">{{ $message }}</span>
@@ -69,7 +61,7 @@
             <input type="submit" value="บันทึก" class="btn btn-primary">
             <a href="login" role="button"class="btn btn-warning">ย้อนกลับ</a>
         </div>
-        
-        
+
+
     </form>
 @endsection

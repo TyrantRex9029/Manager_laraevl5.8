@@ -11,10 +11,8 @@ Route::get('/search',[DataController::class,'search']);
 // สรา้งสมาชิก
 Route::post('/saveData', [DataController::class, 'store']); 
 Route::get('/create', [DataController::class, 'create']);
-
 //test route
 Route::get('/place_create',[DataController::class,'place_create']);
-Route::get('/place_save',[DataController::class,'place_save']);
 Route::post('/savePlace', [DataController::class, 'storePlace']);
 });
 
@@ -26,6 +24,7 @@ Route::post('/login', [AuthController::class, 'checkLogin']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/NonsaveData', [DataController::class, 'Nonstore']); 
+
 
 
 

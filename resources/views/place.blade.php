@@ -6,7 +6,7 @@
     <h2>ระบบจัดการที่จังหวัด และ จัดการอำเภอ</h2>
     <form method="POST" action="/savePlace">
         @csrf
-        <div class="input-group py-2">
+        <div class="input-group py-3">
             <span class="input-group-text">จังหวัด</span>
             <input type="text" name="city" class="form-control">
             <span class="input-group-text">อำเภอ</span>

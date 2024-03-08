@@ -5,7 +5,7 @@
 @section('content_user')
     <h2 class="py-2">สมาชิกทั้งหมด</h2>
     <form method="get" action="/search">
-        <div class="input-group">
+        <div class="input-group py-3">
             <input class="form-control" name="search" placeholder="Search..." value="{{ isset($search) ? $search : ''}}">
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
