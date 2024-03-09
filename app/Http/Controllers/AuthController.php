@@ -10,7 +10,7 @@ use App\DataModel;
 class AuthController extends Controller
 {
    
-    public function showLogin()
+    public function login()
     {
         return view('login');
     }
@@ -31,7 +31,7 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/index');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
