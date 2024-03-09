@@ -19,12 +19,11 @@ class DataController extends Controller
 //////////////////////////////////////////Error///////////////////////////////////////////////////
     public function search(Request $request){                                                   //
         $search = $request->search;                                                             //                                                                                          //
-        $DataModels =User::where(function($query) use ($search){                                //                                
+        $DataSearch =User::where(function($query) use ($search){                                //                                
             $query->where('name','like',"%$search%")->orWhere('lastname','like',"%$search%")    //
             ->orWhere('tel','like',"%$search%")->orWhere('email','like',"%$search%")            //
-            ->orWhere('address','like',"%$search%");})->get();                                  //
-           dd($DataModels);                                                                     //
-           // return view('manager',compact('DataModels','search'));                            //
+            ->orWhere('address','like',"%$search%");})->get();                                  //                                                    //
+            return view('search',compact('DataSearch','search'));                              //
     }                                                                                           //
  /////////////////////////////////////////////////////////////////////////////////////////////////
    public function create(){
