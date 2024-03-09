@@ -51,6 +51,12 @@
                 @endforeach
             </select>
         </div>
+        <div class="input-group py-2">
+            <span class="input-group-text">รหัสไปรษณีย์</span>
+            <input type="text" name="code" class="form-control">
+            <span class="input-group-text">รหัสผ่าน</span>
+            <input type="password" name="password" class="form-control">
+        </div>
         @error('code')
             <span class="text text-danger">{{ $message }}</span>
         @enderror

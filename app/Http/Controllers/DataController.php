@@ -22,13 +22,8 @@ class DataController extends Controller
         $DataSearch =User::where(function($query) use ($search){                                //                                
             $query->where('name','like',"%$search%")->orWhere('lastname','like',"%$search%")    //
             ->orWhere('tel','like',"%$search%")->orWhere('email','like',"%$search%")            //
-<<<<<<< HEAD
             ->orWhere('address','like',"%$search%");})->get();                                  //                                                                  //
            return view('search',compact('DataSearch','search'));                               //
-=======
-            ->orWhere('address','like',"%$search%");})->get();                                  //                                                    //
-            return view('search',compact('DataSearch','search'));                              //
->>>>>>> 5f18973cfddb2acc41035549e9d9e981d0f6bd79
     }                                                                                           //
  /////////////////////////////////////////////////////////////////////////////////////////////////
    public function create(){
@@ -38,7 +33,7 @@ class DataController extends Controller
     public function store(DataRequest $request){
         $saveData = new User;
         $this->save($saveData, $request);
-        return redirect('/index');
+        return redirect('/');
     }
 
 
