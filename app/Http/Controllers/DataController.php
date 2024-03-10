@@ -14,21 +14,20 @@ class DataController extends Controller
 {
     public function index(){
         $DataModels = User::paginate(10);
-        return view('manager',compact('DataModels'));
+        return view('Admin.manager',compact('DataModels'));
     }
-//////////////////////////////////////////Error///////////////////////////////////////////////////
-    public function search(Request $request){                                                   //
-        $search = $request->search;                                                             //                                                                                          //
-        $DataSearch =User::where(function($query) use ($search){                                //                                
-            $query->where('name','like',"%$search%")->orWhere('lastname','like',"%$search%")    //
-            ->orWhere('tel','like',"%$search%")->orWhere('email','like',"%$search%")            //
-            ->orWhere('address','like',"%$search%");})->get();                                  //                                                                  //
-           return view('search',compact('DataSearch','search'));                               //
-    }                                                                                           //
- /////////////////////////////////////////////////////////////////////////////////////////////////
+    public function search(Request $request){                                                   
+        $search = $request->search;                                                                                                                                                      //
+        $DataSearch =User::where(function($query) use ($search){                                                               
+            $query->where('firstname','like',"%$search%")->orWhere('lastname','like',"%$search%")    
+            ->orWhere('tel','like',"%$search%")->orWhere('email','like',"%$search%")            
+            ->orWhere('address','like',"%$search%");})->get();                                                                                                   //
+           return view('Admin.search',compact('DataSearch','search'));                               
+    }                                                                                           
+
    public function create(){
         $DataPlace = DataModel::select('city','dis')->get();
-        return view('form_manager',compact('DataPlace'));
+        return view('Admin.form_manager',compact('DataPlace'));
     }
     public function store(DataRequest $request){
         $saveData = new User;
@@ -61,7 +60,7 @@ class DataController extends Controller
     ///////////////////////Place////////////////////////////////
     public function place_create(){
         $DataModels_place = DataModel::paginate(10);
-        return view('place',compact('DataModels_place'));
+        return view('Admin.place',compact('DataModels_place'));
     }
 
     public function storePlace(PlaceRequest $request){

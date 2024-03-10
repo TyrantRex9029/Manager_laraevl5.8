@@ -24,15 +24,15 @@ class DataRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      =>'required',   
-            'lastname'  =>'required',  
-            'tel'       =>'required',       
-            'email'     =>'required',     
-            'address'   =>'required',  
-            'city'      =>'required',
-            'dis'       =>'required', 
-            'code'      =>'required',      
-            'password'  =>'required'
+            'firstname'     =>'required',   
+            'lastname'      =>'required',  
+            'tel'           =>'required',       
+            'email'         =>'required',     
+            'address'       =>'required',  
+            'amphure_id'     =>'required',
+            'province_id'   =>'required', 
+            'zipcode'       =>'required',      
+            'password'      =>'required'
         ];
     }
 }

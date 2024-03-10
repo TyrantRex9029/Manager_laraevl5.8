@@ -1,4 +1,4 @@
-@extends('layoutuser')
+@extends('layout.layoutuser')
 
 @section('title_user', 'สมาชิกทั้งหมด')
 
@@ -23,14 +23,13 @@
         <tbody>
             @foreach ($DataSearch as $item)
                 <tr>
-                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->firstname }}</td>
                     <td>{{ $item->lastname }}</td>
                     <td>{{ $item->tel }}</td>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->address }}</td>
                 </tr>
             @endforeach
-            
         </tbody>
     </table>
     {{-- {{$DataSearch->links()}} --}}

@@ -1,4 +1,4 @@
-@extends('layout_login')
+@extends('layout.layout_login')
 
 @section('title_login', 'แสดงข้อมูลในรูปแบบตาราง')
 
@@ -8,7 +8,7 @@
         @csrf
         <div class="input-group py-2">
             <span class="input-group-text">ชื่อ</span>
-            <input type="text" name="name" class="form-control">
+            <input type="text" name="firstname" class="form-control">
             <span class="input-group-text">นามสกุล</span>
             <input type="text" name="lastname" class="form-control">
         </div>
@@ -38,26 +38,26 @@
             <span class="text text-danger">{{ $message }}</span>
         @enderror
         <div class="input-group py-2">
-            <label class="input-group-text" for="city">จังหวัด</label>
-            <select name="city" id="city"class="form-select">
-                @foreach ($DataPlace as $item)
-                    <option value = "{{ $item->city }}">{{ $item->city }}</option>
+            <label class="input-group-text" for="province_id">จังหวัด</label>
+            <select name="province_id" id="province_id"class="form-select">
+                @foreach ($GetProvince as $item)
+                    <option value = "{{ $item->id }}">{{ $item->province_name  }}</option>
                 @endforeach
             </select>
-            <label class="input-group-text" for="dis">อำเภอ</label>
-            <select name="dis" id="dis"class="form-select">
-                @foreach ($DataPlace as $item)
-                    <option value = "{{ $item->dis }}">{{ $item->dis }}</option>
+            <label class="input-group-text" for="amphure_id">อำเภอ</label>
+            <select name="amphure_id" id="amphure_id"class="form-select">
+                @foreach ($GetAmphure as $item)
+                    <option value = "{{ $item->province_id }}">{{ $item->amphure_name }}</option>
                 @endforeach
             </select>
         </div>
         <div class="input-group py-2">
             <span class="input-group-text">รหัสไปรษณีย์</span>
-            <input type="text" name="code" class="form-control">
+            <input type="text" name="zipcode" class="form-control">
             <span class="input-group-text">รหัสผ่าน</span>
             <input type="password" name="password" class="form-control">
         </div>
-        @error('code')
+        @error('zipcode')
             <span class="text text-danger">{{ $message }}</span>
         @enderror
         @error('password')

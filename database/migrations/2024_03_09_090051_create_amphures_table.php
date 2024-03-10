@@ -16,9 +16,10 @@ class CreateAmphuresTable extends Migration
         Schema::create('amphures', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('province_id');
-            $table->integer('geo_id');
             $table->string('amphure_name');
             $table->string('province_code');
+            $table->string('zipcode');
+
             $table->timestamps();
         });
     }

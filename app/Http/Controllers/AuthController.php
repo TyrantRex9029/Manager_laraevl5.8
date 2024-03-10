@@ -12,13 +12,14 @@ class AuthController extends Controller
    
     public function login()
     {
-        return view('login');
+        return view('Admin.login');
     }
 
     public function register()
     {
-        $DataPlace = DataModel::select('city','dis')->get();
-        return view('RegisterForm',compact('DataPlace'));
+        $GetProvince = \App\Models\Province::select('id','province_name')->get();
+        $GetAmphure = \App\Models\Amphure::select('province_id','amphure_name')->get();
+        return view('Admin.RegisterForm',compact('GetProvince','GetAmphure'));
     }
 
     public function checkLogin(Request $request)

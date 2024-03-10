@@ -1,4 +1,4 @@
-@extends('layout_login')
+@extends('layout.layout_login')
 
 @section('title_login', 'แสดงข้อมูลในรูปแบบตาราง')
 

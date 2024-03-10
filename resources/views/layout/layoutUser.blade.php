@@ -33,10 +33,17 @@
 
                     </ul>
                   </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/place_create">ระบบจัดการที่จังหวัดและอำเภอ</a>
+            
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                        ระบบจัดการจังหวัดและอำเภอ
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/Province">จัดการจังหวัด</a></li>
+                      <li><a class="dropdown-item" href="/Amphure">จัดการอำเภอ</a></li>
+                    </ul>
                 </li>
-               
+
                 <li class="nav-item">
                   <a class="nav-link" href="{{ url('logout') }}">ออกจากระบบ</a>
               </li>

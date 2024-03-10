@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
 
     /**
@@ -17,6 +18,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
+        'firstname'  ,   
+        'lastname'   ,  
+        'tel'        ,       
+        'email'      ,     
+        'address'    ,  
+        'amphure_id' ,
+        'province_id', 
+        'zipcode'    ,      
+        'password' 
     ];
 
     /**
@@ -36,8 +46,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function User_place()
-{
-    return $this->belongsTo('App\DataModel')->withDefault();
+  
+
+public function Amphure(){
+    return $this->hasOne('\App\Models\Amphure','id','amphur_id');
 }
+
+public function Province(){
+    return $this->hasOne('\App\Models\Province','id','province_id');
+}
+
 }
