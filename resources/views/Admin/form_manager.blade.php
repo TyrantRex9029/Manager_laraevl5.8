@@ -38,24 +38,28 @@
             <span class="text text-danger">{{ $message }}</span>
         @enderror
         <div class="input-group py-2">
-            <label class="input-group-text" for="province_id">จังหวัด</label>
-            <select name="province_id" id="province_id"class="form-select">
-                @foreach ($GetProvince as $item)
-                    <option value = "{{ $item->id }}">{{ $item->province_name  }}</option>
+            <label class="input-group-text">จังหวัด</label>
+            <select id="input_province" name="province_id" class="form-select">
+                <option value = "">กรุณาเลือกจังหวัด</option>
+                @foreach ($provinces as $item)
+                    <option value="{{ $item->id }}">{{ $item->province_name }}</option>
                 @endforeach
             </select>
-            <label class="input-group-text" for="amphure_id">อำเภอ</label>
-            <select name="amphure_id" id="amphure_id"class="form-select">
-                @foreach ($GetAmphure as $item)
-                    <option value = "{{ $item->province_id }}">{{ $item->amphure_name }}</option>
+
+
+            <label class="input-group-text">อำเภอ</label>
+            <select id="input_amphure" name="amphure_id" class="form-select">
+                <option value = "">กรุณาเลือกเขต/อำเภอ</option>
+                @foreach ($amphures as $item)
+                    <option value="{{ $item->id }}"></option>
                 @endforeach
             </select>
         </div>
         <div class="input-group py-2">
             <span class="input-group-text">รหัสไปรษณีย์</span>
-            <input type="text" name="zipcode" class="form-control">
+            <input id="input_zipcode" name="zipcode" class="form-control" placeholder="รหัสไปรษณีย์" />
             <span class="input-group-text">รหัสผ่าน</span>
-            <input type="password" name="password" class="form-control">
+            <input type="text" name="password" class="form-control">
         </div>
         @error('zipcode')
             <span class="text text-danger">{{ $message }}</span>
@@ -66,82 +70,57 @@
         <div>
             <input type="submit" value="บันทึก" class="btn btn-primary">
         </div>
-
     </form>
+
+    <script>
+        function showAmphures() {
+    let input_province = document.querySelector("#input_province");
+    let url = "{{ url('/amphures') }}?province_id=" + input_province.value;
+    console.log(url);
+    //  if(input_province.value == "") return;
+    fetch(url)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            //UPDATE SELECT OPTION
+            let input_amphure = document.querySelector("#input_amphure");
+            input_amphure.innerHTML = '<option value="">กรุณาเลือกเขต/อำเภอ</option>';
+            for (let item of result) {
+                let option = document.createElement("option");
+                option.text = item.amphure_name;
+                option.value = item.id;
+                input_amphure.appendChild(option);
+            }
+            //QUERY AMPHOES
+            showZipcode();
+        });
+}
+
+function showZipcode() {
+    let input_province = document.querySelector("#input_province");
+    let input_amphure = document.querySelector("#input_amphure");
+    let url = "{{ url('/zipcodes') }}?province_id=" + input_province.value + "&id=" + input_amphure.value;
+    console.log(url);
+    fetch(url)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            //UPDATE SELECT OPTION
+            let input_zipcode = document.querySelector("#input_zipcode");
         
-    {{-- <script>
-        $('#add_province').select();
-        $('#add_amphure').select();
-        $('#add_current_address_province_id').select();
-        $('#add_current_address_amphur_id').select();
-
-        $('body').on('change', '#add_province', function() {
-            var province_id = $(this).val();
-            $('#add_zipcode').val('');
-            $('#add_amphure').empty();
-            $('#add_amphure').append('<option value="">เลือกอำเภอ</option>');
-            $('#add_amphure').select2('val', '');
-            $.ajax({
-                method: "GET",
-                url: url_gb + "User/GetAmphur/" + province_id,
-                dataType: 'json'
-            }).done(function(res) {
-                $.each(res, function(k, v) {
-                    $('#add_amphure').append('<option value="' + v.id + '">' + v.amphure_name +
-                        '</option>');
-                });
-            }).fail(function(data) {
-                //        btn.button("reset");
-            });
+            for (let item of result) {
+                input_zipcode.value = item.zipcode;
+                break;
+            }
         });
-
-        $('body').on('change', '#add_amphure', function() {
-            var amphur_id = $(this).val();
-            $.ajax({
-                method: "GET",
-                url: url_gb + "User/GetZipcode/" + amphur_id,
-                dataType: 'json'
-            }).done(function(res) {
-                $('#add_zipcode').val(res);
-            }).fail(function(data) {
-                //        btn.button("reset");
-            });
-
-        });
-
-        $('body').on('change', '#add_current_address_province_id', function() {
-            var province_id = $(this).val();
-            $('#add_current_address_zipcode').val('');
-            $('#add_current_address_amphur_id').empty();
-            $('#add_current_address_amphur_id').append('<option value="">เลือกอำเภอ</option>');
-            $('#add_current_address_amphur_id').select('val', '');
-            $.ajax({
-                method: "GET",
-                url: url_gb + "/User/GetAmphur/" + province_id,
-                dataType: 'json'
-            }).done(function(res) {
-                $.each(res, function(k, v) {
-                    $('#add_current_address_amphur_id').append('<option value="' + v.id + '">' + v
-                        .amphure_name + '</option>');
-                });
-            }).fail(function(data) {
-                //        btn.button("reset");
-            });
-        });
-
-        $('body').on('change', '#add_current_address_amphur_id', function() {
-            var amphur_id = $(this).val();
-            $.ajax({
-                method: "GET",
-                url: url_gb + "/User/GetZipcode/" + amphur_id,
-                dataType: 'json'
-            }).done(function(res) {
-                $('#add_current_address_zipcode').val(res);
-            }).fail(function(data) {
-                //        btn.button("reset");
-            });
-
-        });
-    </script> --}}
+}
+//EVENTS
+document.querySelector('#input_province').addEventListener('change', (event) => {
+    showAmphures();
+});
+document.querySelector('#input_amphure').addEventListener('change', (event) => {
+    showZipcode();
+});
+    </script>
 
 @endsection

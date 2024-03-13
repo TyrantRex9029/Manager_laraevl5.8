@@ -17,9 +17,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        $GetProvince = \App\Models\Province::select('id','province_name')->get();
-        $GetAmphure = \App\Models\Amphure::select('province_id','amphure_name')->get();
-        return view('Admin.RegisterForm',compact('GetProvince','GetAmphure'));
+        $provinces = \App\Models\Province::select('id','province_name')->distinct()->get();
+        $amphures = \App\Models\Amphure::select('id','province_id','amphure_name','zipcode')->distinct()->get();
+        return view('Admin.RegisterForm',compact('provinces','amphures'));
     }
 
     public function checkLogin(Request $request)

@@ -35,13 +35,13 @@
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
-                <th scope="col">ไอดี จังหวัด</th>
+                <th scope="col">ไอดีจังหวัด</th>
                 <th scope="col">อำเภอ</th>
                 <th scope="col">รหัสไปรณีย์</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($resull as $item)
+            @foreach ($result as $item)
                 <tr>
                     <td>{{$item->province_id}}</td>
                     <td>{{$item->amphure_name}}</td>
@@ -50,5 +50,5 @@
             @endforeach 
         </tbody>
     </table>
-    {{$resull->links()}} 
+    {{$result->links()}} 
 @endsection

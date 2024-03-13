@@ -24,12 +24,39 @@ class CreateUserController extends Controller
             ->orWhere('address','like',"%$search%");})->get();                                                                                                   //
            return view('Admin.search',compact('DataSearch','search'));                               
     } 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function create(){
-        $GetProvince = \App\Models\Province::select('id','province_name')->get();
-        $GetAmphure = \App\Models\Amphure::select('province_id','amphure_name')->get();
-        return view('Admin.form_manager',compact('GetProvince','GetAmphure'));
+        $provinces = \App\Models\Province::select('id','province_name')->distinct()->get();
+        $amphures = \App\Models\Amphure::select('id','province_id','amphure_name','zipcode')->distinct()->get();
+        return view('Admin.form_manager',compact('provinces','amphures'));
+}
+
+    public function getProvinces(){
+        $provinces = \App\Models\Province::select('id')
+            ->distinct()
+            ->get();
+        return $provinces;
     }
+    public function getAmphures(Request $request)
+    {
+        $province = $request->get('province_id');
+        $amphures = \App\Models\Amphure::select('id','amphure_name')
+            ->where('province_id', 'like', "%$province%")
+            ->distinct()
+            ->get();
+        return $amphures;
+    }
+    public function getZipcodes(Request $request){
+        $province = $request->get('province_id');
+        $amphure = $request->get('id');
+        $zipcodes = \App\Models\Amphure::select('zipcode')
+            ->where('province_id', $province)
+            ->where('id', $amphure)
+            ->get();
+        return $zipcodes;
+    }
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function store(Request $request){
         $saveData = new \App\User;
         $this->save($saveData, $request);
@@ -53,37 +80,8 @@ class CreateUserController extends Controller
         $data ->amphure_id      =$value->amphure_id;   
         $data ->province_id     =$value->province_id;  
         $data ->zipcode         =$value->zipcode;  
-        $data ->password =Hash::make($value->password);
+        $data ->password        =Hash::make($value->password);
         $data ->save();
     }
-
-  
-
-
-    /////////////////////////////////////////////////////
-
-    // public function queryForExport($request){
-        
-
-    //     $result = \App\User::select(
-    //         'provinces.province_name',
-    //         'amphures.amphure_name'
-    //     )
-    //     ->leftJoin('provinces', 'admin_users.province_id', '=', 'provinces.id')
-    //     ->leftJoin('amphures', 'admin_users.amphur_id', '=', 'amphures.id');
-    //     return $result;
-    // }
-    // public function GetAmphur($province_id)
-    // {
-    //     $result = \App\Models\Amphure::where('province_id', $province_id)->orderBy('amphure_name')->get();
-    //     return $result;
-    // }
-
-    // public function GetZipcode($amphur_id)
-    // {
-    //     $amphur = \App\Models\Amphure::find($amphur_id);
-    //     $result = $amphur->zipcode;
-    //     return $result;
-    // }
 
 }

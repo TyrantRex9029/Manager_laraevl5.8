@@ -14,8 +14,8 @@ class ProvinceController extends Controller
      */
     public function index()
     {   
-        $resull = \App\Models\Province::paginate(10);
-        return view('Admin.province', compact('resull'));
+        $result = \App\Models\Province::paginate(10);
+        return view('Admin.province', compact('result'));
     }
 
 

@@ -5,6 +5,9 @@ Route::post('/login', 'AuthController@checkLogin');
 Route::get('/register', 'AuthController@register');
 Route::get('/logout', 'AuthController@logout');
 Route::post('/NonsaveData','Admin\CreateUserController@Nonstore'); 
+Route::get('/provinces','Admin\CreateUserController@getProvinces');
+Route::get('/amphures','Admin\CreateUserController@getAmphures');
+Route::get('/zipcodes','Admin\CreateUserController@getZipcodes');
 
 
 Route::group(['middleware' => 'auth.admin'], function () {
@@ -20,7 +23,5 @@ Route::post('/Province', 'Admin\ProvinceController@store');
 
 Route::get('/Amphure', 'Admin\AmphureController@index');
 Route::post('/Amphure', 'Admin\AmphureController@store');
-Route::get('/User/GetAmphur/{province_id}', 'Admin\CreateUserController@GetAmphur');
-Route::get('/User/GetZipcode/{amphure_id}', 'Admin\CreateUserController@GetZipcode');
 
 });

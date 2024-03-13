@@ -14,9 +14,9 @@ class AmphureController extends Controller
      */
     public function index()
     {
-        $resull = \App\Models\Amphure::paginate(10);
+        $result = \App\Models\Amphure::paginate(10);
         $getProvince = \App\Models\Province::select('id','province_name')->get();
-        return view('Admin.amphure', compact('resull','getProvince'));
+        return view('Admin.amphure', compact('result','getProvince'));
     }
     public function store(Request $request)
     {

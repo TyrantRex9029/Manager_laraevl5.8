@@ -24,12 +24,12 @@
         </tr>
     </thead>
     <tbody>
-         @foreach ($resull as $item)
+         @foreach ($result as $item)
             <tr>
                 <td>{{$item->province_name}}</td>
             </tr>
         @endforeach 
     </tbody>
 </table>
-{{$resull->links()}} 
+{{$result->links()}} 
 @endsection
